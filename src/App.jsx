@@ -3,17 +3,18 @@ import { useState } from 'react'
 // import './index.css'
 
 
+import AppRoutes from "./routes/AppRoutes.jsx"
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <h1 className="text-3xl font-bold bg-red-500 text-white px-6 py-3 rounded-lg">
-        Hello Tektal 
-      </h1>
+    <div className="min-h-screen bg-red-100">
+      <AppRoutes />
     </div>
   )
 }
 
 export default App
+
   
   
 
