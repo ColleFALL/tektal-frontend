@@ -18,7 +18,7 @@ function Welcome() {
         onClick={() => navigate("/login")}
         className="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600"
       >
-        Commencer
+        Commencer maintenant
       </button>
 
     </div>
