@@ -1,5 +1,5 @@
-function Ajouter() {
-  return <div>Ajouter</div>
-}
+// function Ajouter() {
+//   return <div>Ajouter</div>
+// }
 
-export default Ajouter
+// export default Ajouter
