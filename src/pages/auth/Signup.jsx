@@ -143,36 +143,33 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
+ const handleSignup = async (e) => {
+  e.preventDefault();
 
-    try {
-      // 👉 appel Djoser
-      const res = await authService.register({
-        email: formData.email,
-        password: formData.password,
-        name: formData.fullName, // ✅ IMPORTANT
-      });
+  try {
+    const res = await authService.register({
+      email: formData.email,
+      name: formData.fullName,
+      password: formData.password,
+      re_password: formData.password,
+    });
 
-      console.log("Inscription réussie :", res.data);
+    console.log("Inscription réussie :", res.data);
 
-      // 👉 message utilisateur
-      alert("Compte créé ! Vérifie ton email pour activer ton compte.");
+    alert("Compte créé ! Vérifie ton email pour activer ton compte.");
 
-      // 👉 redirection
-      navigate('/login');
+    navigate('/login');
 
-    } catch (error) {
-      console.error("Erreur signup :", error.response?.data);
+  } catch (error) {
+    console.error("Erreur signup :", error.response?.data);
 
-      // 👉 affichage erreur backend
-      if (error.response?.data) {
-        alert(JSON.stringify(error.response.data));
-      } else {
-        alert("Erreur serveur");
-      }
+    if (error.response?.data) {
+      alert(JSON.stringify(error.response.data));
+    } else {
+      alert("Erreur serveur");
     }
-  };
+  }
+};
 
   return (
     <div className="min-h-screen w-full bg-gray-200 flex justify-center items-center font-sans">
