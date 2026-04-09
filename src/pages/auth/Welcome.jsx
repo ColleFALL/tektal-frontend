@@ -40,12 +40,6 @@ const Welcome = () => {
                 TEKTAL
               </h1>
 
-      {/* <button
-        onClick={() => navigate("/login")}
-        className="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600"
-      >
-        Commencer maintenant
-      </button> */}
               <button 
                 onClick={handleNext}
                 className="bg-white text-[#1a2b4c] text-lg font-bold px-12 py-3 rounded-full flex items-center gap-3 shadow-xl active:scale-95 transition-all cursor-pointer"
@@ -643,4 +637,3 @@ export default Welcome;
 //     </div>
 //   );
 // }
->>>>>>> 44e57d3037d0df5a90fbf22390acccac423b2c9b
