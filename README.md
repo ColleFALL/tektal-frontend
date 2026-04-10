@@ -135,7 +135,7 @@ VITE_API_URL=http://localhost:8000/api
 
 Le frontend est conçu pour fonctionner avec une API Django REST.
 
- Les endpoints backend (auth, paths, users, admin, etc.) sont déjà définis côté backend.
+ Les endpoints backend (accounts, paths, admin, etc.) sont déjà définis côté backend.
  Le développeur doit récupérer la documentation backend pour connecter les services dans `src/services`.
 
 ---
