@@ -27,7 +27,7 @@ const Welcome = () => {
             {/* Image + Calque Jaune */}
             <div className="absolute inset-0 z-0">
               <img 
-                src="src/assets/premier (3).jpeg" 
+                src="src/assets/premier3.jpeg" 
                 alt="Background 1"
                 className="w-full h-full object-cover"
               />
@@ -57,7 +57,7 @@ const Welcome = () => {
             {/* Image du haut avec la courbe blanche */}
             <div className="relative w-full h-[48%] overflow-hidden">
               <img 
-                src="src/assets/bang-rang.jpeg" 
+                src="src/assets/bangrang.jpeg" 
                 alt="Background 2"
                 className="w-full h-full object-cover"
               />

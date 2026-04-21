@@ -34,7 +34,7 @@ const Login = () => {
         {/* 1. HEADER */}
         <div className="relative w-full h-[35%] overflow-hidden">
           <img 
-            src="src/assets/premier (2).jpeg" 
+            src="src/assets/premier2.jpeg" 
             alt="Login Background"
             className="w-full h-full object-cover"
           />

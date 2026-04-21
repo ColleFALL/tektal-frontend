@@ -37,7 +37,7 @@ const Signup = () => {
         {/* 1. HEADER */}
         <div className="relative w-full h-[28%] overflow-hidden">
           <img 
-            src="src/assets/bang-rang.jpeg" 
+            src="src/assets/bangrang.jpeg" 
             alt="Signup Background"
             className="w-full h-full object-cover"
           />
