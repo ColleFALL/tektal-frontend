@@ -19,6 +19,7 @@ import PathConfirmation from "../pages/dashboard/PathConfirmation"
 import StepCreation from "../pages/dashboard/StepCreation"
 import VideoPlayer from "../pages/dashboard/VideoPlayer"
 import VideoUpload from "../pages/dashboard/VideoUpload"
+import Activate from  "../pages/auth/Activate"
 
 function AppRoutes() {
   return (
@@ -32,6 +33,8 @@ function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/activate" element={<Activate />} />
+
 
         {/*  DASHBOARD */}
         <Route path="/home" element={<Accueil />} />
