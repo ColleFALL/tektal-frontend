@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import premier2  from  "../../assets/images/premier2.jpeg" 
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const ForgotPassword = () => {
         {/* 1. HEADER */}
         <div className="relative w-full h-[35%] overflow-hidden">
           <img 
-            src="src/assets/premier (2).jpeg" 
+            src={premier2} 
             alt="Forgot Password Background"
             className="w-full h-full object-cover"
           />

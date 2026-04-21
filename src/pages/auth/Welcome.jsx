@@ -1,6 +1,9 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import premier3 from "../../assets/images/premier3.jpeg";
+import bangrang from "../../assets/images/bangrang.jpeg";
+
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -26,11 +29,11 @@ const Welcome = () => {
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
             {/* Image + Calque Jaune */}
             <div className="absolute inset-0 z-0">
-              <img 
-                src="src/assets/premier3.jpeg" 
+              <img src={premier3} 
                 alt="Background 1"
                 className="w-full h-full object-cover"
               />
+
               <div className="absolute inset-0 bg-[#FEBD00] opacity-85"></div>
             </div>
 
@@ -56,8 +59,7 @@ const Welcome = () => {
             
             {/* Image du haut avec la courbe blanche */}
             <div className="relative w-full h-[48%] overflow-hidden">
-              <img 
-                src="src/assets/bangrang.jpeg" 
+              <img src={bangrang}
                 alt="Background 2"
                 className="w-full h-full object-cover"
               />

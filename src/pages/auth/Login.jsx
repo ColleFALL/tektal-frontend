@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import premier2 from "../../assets/images/premier2.jpeg"
 // Import des icônes
 import { Eye, EyeOff } from 'lucide-react'; 
 
@@ -34,7 +35,7 @@ const Login = () => {
         {/* 1. HEADER */}
         <div className="relative w-full h-[35%] overflow-hidden">
           <img 
-            src="src/assets/premier2.jpeg" 
+            src= {premier2}
             alt="Login Background"
             className="w-full h-full object-cover"
           />

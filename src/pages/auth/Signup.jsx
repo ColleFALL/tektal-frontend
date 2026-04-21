@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import bangrang from  "../../assets/images/bangrang.jpeg"
 // Import des icônes professionnelles
 import { Eye, EyeOff } from 'lucide-react';
 
@@ -37,7 +38,7 @@ const Signup = () => {
         {/* 1. HEADER */}
         <div className="relative w-full h-[28%] overflow-hidden">
           <img 
-            src="src/assets/bangrang.jpeg" 
+            src={bangrang} 
             alt="Signup Background"
             className="w-full h-full object-cover"
           />
