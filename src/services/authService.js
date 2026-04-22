@@ -9,7 +9,7 @@ export const authService = {
     return response.data;
   },
 
-  // REGISTER ✅ registration_source: 'web' ajouté
+  // REGISTER  registration_source: 'web' ajouté
   register: async (data) => {
     return await API.post("/auth/users/", {
       ...data,
