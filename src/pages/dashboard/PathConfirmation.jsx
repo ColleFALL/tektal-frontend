@@ -36,7 +36,7 @@ export default function PathConfirmation() {
       alert("Impossible de partager pour le moment");
     }
   };
-
+  // return
   return (
     <div className="min-h-screen w-full bg-gray-200 flex justify-center items-center font-sans">
       <div className="relative w-full max-w-[450px] h-screen bg-white shadow-2xl overflow-hidden flex flex-col">
