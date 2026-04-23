@@ -42,6 +42,8 @@
 //     });
 //   },
 // };
+
+
 import { CLOUDINARY_CONFIG, CLOUDINARY_UPLOAD_OPTIONS } from '../config/cloudinary.config';
 
 export const cloudinaryService = {
