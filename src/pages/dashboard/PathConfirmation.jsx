@@ -243,7 +243,6 @@ export default function PathConfirmation() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ✅ videoUrl au lieu de videoFile — déjà uploadé sur Cloudinary
   const {
     videoUrl, previewUrl, duration,
     departure, destination, pathType,
@@ -261,32 +260,65 @@ export default function PathConfirmation() {
     setError("");
 
     try {
-      // ✅ Plus d'upload Cloudinary ici — videoUrl est déjà prête
       setProgress("💾 Création du chemin...");
+
+      // ✅ Calculer start_time et end_time pour chaque étape
+      const totalDuration = Math.round(duration || 0);
+      const stepCount = steps?.length || 1;
+      const timePerStep = Math.floor(totalDuration / stepCount);
+
+      const stepsWithTime = steps?.map((s, i) => ({
+        step_number: s.step_number,
+        text:        s.text,
+        start_time:  i * timePerStep,
+        end_time:    i === stepCount - 1
+          ? totalDuration
+          : (i + 1) * timePerStep,
+      })) || [];
 
       const payload = {
         title:       `${departure} → ${destination}`,
         start_label: departure,
         end_label:   destination,
-        video_url:   videoUrl,  // ✅ URL Cloudinary reçue depuis VideoUpload
-        duration:    duration || 0,
+        video_url:   videoUrl,
+        duration:    totalDuration,
         is_official: pathType === "official",
-        steps:       steps || [],
-        platform:    "web",     // ✅ on précise la plateforme
+        steps:       stepsWithTime,
+        platform:    "web",
         ...(establishmentId ? { establishment: establishmentId } : {}),
       };
+
+      console.log("📦 Payload envoyé:", JSON.stringify(payload, null, 2));
 
       const res = await API.post("/paths/create/", payload);
       setCreatedPath(res.data);
       setProgress("");
 
     } catch (err) {
-      console.error("Erreur publication:", err);
-      const msg =
-        err?.response?.data?.detail ||
-        err?.response?.data?.message ||
-        err?.message ||
-        "Une erreur est survenue.";
+      // ✅ Log détaillé pour voir l'erreur exacte du backend
+      console.error("❌ Erreur complète:", err?.response?.data);
+      console.error("❌ Status:", err?.response?.status);
+
+      const data = err?.response?.data;
+      let msg = "Une erreur est survenue.";
+
+      if (data) {
+        if (typeof data === "string") {
+          msg = data;
+        } else if (data.detail) {
+          msg = data.detail;
+        } else if (data.message) {
+          msg = data.message;
+        } else if (data.non_field_errors) {
+          msg = data.non_field_errors[0];
+        } else {
+          // ✅ Affiche tous les champs en erreur
+          msg = Object.entries(data)
+            .map(([key, val]) => `${key}: ${Array.isArray(val) ? val.join(", ") : val}`)
+            .join(" | ");
+        }
+      }
+
       setError(msg);
     } finally {
       setSubmitting(false);
@@ -371,7 +403,7 @@ export default function PathConfirmation() {
 
         <div className="flex-1 overflow-y-auto px-5 py-5 pb-28 space-y-4">
 
-          {/* ✅ Aperçu vidéo depuis previewUrl local */}
+          {/* Aperçu vidéo */}
           {previewUrl && (
             <div className="rounded-2xl overflow-hidden border border-gray-200">
               <video src={previewUrl} controls className="w-full h-52 object-cover bg-black" />
@@ -382,9 +414,8 @@ export default function PathConfirmation() {
           <div className="rounded-2xl bg-[#F8F8F8] border border-gray-100 p-4 space-y-3">
             <Row label="Titre"  value={`${departure} → ${destination}`} />
             <Row label="Type"   value={pathType === "official" ? "🏛️ Officiel" : "👥 Communautaire"} />
-            <Row label="Durée"  value={`${duration || "?"} sec`} />
+            <Row label="Durée"  value={`${Math.round(duration || 0)} sec`} />
             <Row label="Étapes" value={`${steps?.length || 0} étape${steps?.length > 1 ? "s" : ""}`} />
-            {/* ✅ Confirme que la vidéo est prête */}
             <Row label="Vidéo"  value={videoUrl ? "✅ Prête" : "❌ Manquante"} />
           </div>
 
