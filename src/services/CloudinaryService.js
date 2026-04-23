@@ -1,47 +1,4 @@
-// import { CLOUDINARY_CONFIG, CLOUDINARY_UPLOAD_OPTIONS } from '../config/cloudinary.config';
 
-// export const cloudinaryService = {
-  
-//   // ✅ Upload vidéo avec progression
-//   uploadVideo: async (file, onProgress) => {
-//     const formData = new FormData();
-//     formData.append('file', file);
-//     formData.append('upload_preset', CLOUDINARY_UPLOAD_OPTIONS.upload_preset);
-//     formData.append('folder', CLOUDINARY_UPLOAD_OPTIONS.folder);
-//     formData.append('resource_type', 'video');
-//     formData.append('tags', 'path,web');
-
-//     return new Promise((resolve, reject) => {
-//       const xhr = new XMLHttpRequest();
-
-//       // ✅ Suivi de la progression
-//       xhr.upload.addEventListener('progress', (event) => {
-//         if (event.lengthComputable && onProgress) {
-//           const percent = Math.round((event.loaded / event.total) * 100);
-//           onProgress(percent);
-//         }
-//       });
-
-//       xhr.addEventListener('load', () => {
-//         if (xhr.status === 200) {
-//           const data = JSON.parse(xhr.responseText);
-//           resolve({
-//             url: data.secure_url,       // ✅ URL de la vidéo
-//             publicId: data.public_id,   // ✅ ID Cloudinary
-//             duration: data.duration,    // ✅ Durée en secondes
-//           });
-//         } else {
-//           reject(new Error('Upload échoué'));
-//         }
-//       });
-
-//       xhr.addEventListener('error', () => reject(new Error('Erreur réseau')));
-
-//       xhr.open('POST', CLOUDINARY_CONFIG.UPLOAD_URL);
-//       xhr.send(formData);
-//     });
-//   },
-// };
 import { CLOUDINARY_CONFIG, CLOUDINARY_UPLOAD_OPTIONS } from '../config/cloudinary.config';
 
 export const cloudinaryService = {
