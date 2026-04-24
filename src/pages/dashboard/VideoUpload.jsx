@@ -8,7 +8,7 @@ import {
   CheckCircle2, ImagePlus, Camera,
 } from "lucide-react";
 import BottomNavigation from "../../components/BottomNavigation";
-import { cloudinaryService } from "../../services/CloudinaryService";
+import { cloudinaryService } from  "../../services/CloudinaryService";
 
 export default function VideoUpload() {
   const navigate = useNavigate();
