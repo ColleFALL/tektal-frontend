@@ -1,118 +1,55 @@
-
-
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  ArrowLeft,
-  User,
-  Mail,
-  MapPin,
-  Settings,
-  LogOut,
-  Pencil,
-  ShieldCheck,
-} from "lucide-react";
+import API from "../../services/api";
+import { User, ChevronRight, LogOut, Settings, Pencil, Heart, Map, HelpCircle } from "lucide-react";
 import BottomNavigation from "../../components/BottomNavigation";
 
 export default function Profil() {
   const navigate = useNavigate();
+  const [user, setUser] = useState({ nom: "...", email: "...", campus: "..." });
 
-  const user = {
-    nom: "Antah",
-    email: "antalissa10@email.com",
-    campus: "Bakeli",
-    role: "Utilisateur",
-  };
+  useEffect(() => {
+    API.get("/auth/users/me/").then(res => setUser({
+      nom: res.data.name,
+      email: res.data.email,
+      campus: res.data.establishment_name || res.data.campus || "Non défini"
+    })).catch(console.error);
+  }, []);
 
   return (
-    <div className="min-h-screen w-full bg-gray-200 flex justify-center items-center font-sans">
+    <div className="min-h-screen w-full bg-gray-50 flex justify-center items-center font-sans">
       <div className="relative w-full max-w-[450px] h-screen bg-white shadow-2xl overflow-hidden flex flex-col">
-        <div className="bg-[#FEBD00] px-6 pt-10 pb-7 rounded-b-[35px]">
-          <button
-            onClick={() => navigate(-1)}
-            className="mb-5 flex items-center gap-2 text-sm font-medium text-black"
-          >
-            <ArrowLeft size={18} />
-            Retour
-          </button>
-
-          <div className="flex flex-col items-center">
-            <div className="h-24 w-24 rounded-full bg-white flex items-center justify-center shadow-md">
-              <User size={36} className="text-[#FEBD00]" />
-            </div>
-
-            <h1 className="mt-4 text-2xl font-black text-white">{user.nom}</h1>
-            <p className="mt-1 text-sm text-white/90">{user.role}</p>
+        
+        {/* Header Jaune */}
+        <div className="bg-[#FEBD00] px-6 pt-8 pb-6 flex flex-col items-center text-center">
+          <div className="h-20 w-20 rounded-full bg-white flex items-center justify-center shadow-lg mb-5 border-4 border-white/50">
+            <span className="text-3xl font-black text-[#FEBD00]">
+              {user.nom.substring(0, 2).toUpperCase()}
+            </span>
           </div>
+          <h1 className="text-2xl font-black text-white leading-tight">{user.nom}</h1>
+          <p className="text-white/95 font-bold text-base mt-1">{user.campus}</p>
+          <p className="text-white/80 text-base mt-1">{user.email}</p>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-5 py-5 pb-24">
-          <div className="space-y-4">
-            <div className="rounded-[24px] border border-gray-200 bg-[#F8F8F8] p-4">
-              <div className="flex items-center gap-3">
-                <Mail size={18} className="text-[#FEBD00]" />
-                <div>
-                  <p className="text-xs text-slate-500">Email</p>
-                  <p className="text-sm font-semibold text-slate-900">
-                    {user.email}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-[24px] border border-gray-200 bg-[#F8F8F8] p-4">
-              <div className="flex items-center gap-3">
-                <MapPin size={18} className="text-[#FEBD00]" />
-                <div>
-                  <p className="text-xs text-slate-500">Campus</p>
-                  <p className="text-sm font-semibold text-slate-900">
-                    {user.campus}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-[24px] border border-gray-200 bg-[#F8F8F8] p-4">
-              <div className="flex items-center gap-3">
-                <ShieldCheck size={18} className="text-[#FEBD00]" />
-                <div>
-                  <p className="text-xs text-slate-500">Statut</p>
-                  <p className="text-sm font-semibold text-slate-900">
-                    {user.role}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={() => navigate("/edit-profil")}
-              className="flex w-full items-center gap-3 rounded-[24px] border border-gray-200 bg-white px-4 py-4 text-left"
+        {/* Liste des options */}
+        <div className="flex-1 px-6 py-4 overflow-hidden pb-20">
+          <div className="space-y-2">
+            <OptionItem icon={<Map size={26} />} title="Mes chemins" onClick={() => navigate("/mes-chemins")} />
+            <OptionItem icon={<Heart size={26} />} title="Favoris" onClick={() => navigate("/favoris")} />
+            <OptionItem icon={<Pencil size={26} />} title="Modifier le profil" onClick={() => navigate("/edit-profil")} />
+            
+            <div className="my-6 border-t border-gray-100" />
+            
+            <OptionItem icon={<Settings size={26} />} title="Parametres" gray onClick={() => navigate("/parametres")} />
+            <OptionItem icon={<HelpCircle size={26} />} title="Aide" gray onClick={() => navigate("/aide")} />
+            
+            <button 
+              onClick={() => { localStorage.removeItem("access"); navigate("/"); }}
+              className="flex w-full items-center gap-5 px-3 py-3 text-red-500 font-bold text-xl hover:bg-red-50 rounded-2xl transition"
             >
-              <Pencil size={18} className="text-[#FEBD00]" />
-              <span className="text-sm font-semibold text-slate-800">
-                Modifier le profil
-              </span>
-            </button>
-
-            <button
-              onClick={() => navigate("/parametres")}
-              className="flex w-full items-center gap-3 rounded-[24px] border border-gray-200 bg-white px-4 py-4 text-left"
-            >
-              <Settings size={18} className="text-[#FEBD00]" />
-              <span className="text-sm font-semibold text-slate-800">
-                Parametres
-              </span>
-            </button>
-
-            <button
-              onClick={() => navigate("/")}
-              className="flex w-full items-center gap-3 rounded-[24px] border border-red-100 bg-red-50 px-4 py-4 text-left"
-            >
-              <LogOut size={18} className="text-red-500" />
-              <span className="text-sm font-semibold text-red-500">
-                Se deconnecter
-              </span>
+              <LogOut size={26} className="stroke-red-500" />
+              Se deconnecter
             </button>
           </div>
         </div>
@@ -120,5 +57,26 @@ export default function Profil() {
         <BottomNavigation />
       </div>
     </div>
+  );
+}
+
+function OptionItem({ icon, title, onClick, gray }) {
+  const strokeColor = gray ? "#9CA3AF" : "#FEBD00"; 
+  const textColor = gray ? "text-gray-500" : "text-gray-800";
+
+  const coloredIcon = React.cloneElement(icon, {
+    className: `stroke-[${strokeColor}] stroke-[2.5] ${icon.props.className || ""}`,
+  });
+
+  return (
+    <button onClick={onClick} className="flex w-full items-center justify-between px-3 py-3 hover:bg-gray-50 rounded-2xl transition group">
+      <div className="flex items-center gap-5">
+        <div className="flex items-center justify-center w-6 h-6">
+          {coloredIcon}
+        </div>
+        <span className={`font-bold text-xl ${textColor}`}>{title}</span>
+      </div>
+      <ChevronRight size={24} className="text-gray-400 group-hover:text-gray-600 transition-colors" />
+    </button>
   );
 }
