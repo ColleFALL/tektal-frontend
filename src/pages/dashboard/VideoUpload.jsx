@@ -37,7 +37,7 @@ export default function VideoUpload() {
       return;
     }
 
-    // ✅ Vérification taille max 100MB
+    //  Vérification taille max 100MB
     const MAX_MB = 100;
     if (file.size > MAX_MB * 1024 * 1024) {
       alert(

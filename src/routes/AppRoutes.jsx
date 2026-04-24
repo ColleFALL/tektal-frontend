@@ -20,6 +20,7 @@ import StepCreation from "../pages/dashboard/StepCreation"
 import VideoPlayer from "../pages/dashboard/VideoPlayer"
 import VideoUpload from "../pages/dashboard/VideoUpload"
 import Activate from  "../pages/auth/Activate"
+import Aide from "../pages/dashboard/Aide" // ✅ ajouté
 
 function AppRoutes() {
   return (
@@ -45,6 +46,7 @@ function AppRoutes() {
         <Route path="/profil" element={<Profil />} />
         <Route path="/edit-profil" element={<EditProfil />} />
         <Route path="/parametres" element={<Parametres />} />
+        <Route path="/aide" element={<Aide />} /> {/* ✅ ajouté */}
 
         {/*  PATH / CREATE */}
         <Route path="/create-path" element={<Ajouter />} />
