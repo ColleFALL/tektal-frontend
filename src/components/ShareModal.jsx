@@ -6,7 +6,7 @@ export default function ShareModal({ path, onClose }) {
 
   const token = path?.share_token || String(path?.id);
   const shareUrl = `https://tektal-web-appli.vercel.app/share/${token}`;
-  const shareText = `🗺️ Découvre ce chemin : "${path?.title}"\n👉 ${shareUrl}`;
+  const shareText = ` Découvre ce chemin : "${path?.title}"\n ${shareUrl}`;
 
   const handleCopy = async () => {
     try {
@@ -41,12 +41,12 @@ export default function ShareModal({ path, onClose }) {
   };
 
   return (
-    // ✅ Overlay
+    //  Overlay
     <div
       className="fixed inset-0 z-50 flex items-end justify-center bg-black/50"
       onClick={onClose}
     >
-      {/* ✅ Modal */}
+      {/*  Modal */}
       <div
         className="w-full max-w-[450px] bg-white rounded-t-[28px] px-6 pt-5 pb-10"
         onClick={(e) => e.stopPropagation()}
