@@ -15,7 +15,7 @@ import { usePaths } from "../../context/PathContext";
 export default function Accueil() {
   const navigate = useNavigate();
   const { displayName } = useAuth();
-  const { paths, loading, error, refreshPaths, toggleFavorite } = usePaths();
+  const { paths, loading, error, refreshPaths, toggleFavorite,  loadMore, loadingMore, nextPage, totalCount  } = usePaths();
 
   const [viewMode, setViewMode] = useState("classic");
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,6 +41,8 @@ export default function Accueil() {
       alert("Impossible de partager.");
     }
   };
+
+  
 
   // ── LOADING ───────────────────────────────────────────────────
   if (loading) {
@@ -304,6 +306,32 @@ export default function Accueil() {
                 ))}
               </div>
             )}
+
+
+
+
+
+            {/* ✅ Bouton Voir plus */}
+{nextPage && !searchQuery && (
+  <button
+    onClick={loadMore}
+    disabled={loadingMore}
+    className="mt-4 flex w-full items-center justify-center gap-2 rounded-full border-2 border-[#FEBD00] px-5 py-4 text-sm font-bold text-[#FEBD00] disabled:opacity-50"
+  >
+    {loadingMore ? (
+      <>
+        <div className="w-4 h-4 border-2 border-[#FEBD00] border-t-transparent rounded-full animate-spin" />
+        Chargement...
+      </>
+    ) : (
+      <>
+        {`Voir plus (${paths.length}/${totalCount})`}
+      </>
+    )}
+  </button>
+)}
+
+
 
             <button
               onClick={() => navigate("/ajouter")}
